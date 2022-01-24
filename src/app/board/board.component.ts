@@ -9,6 +9,8 @@ export class BoardComponent implements OnInit {
   squares: string[] = [];
   xIsNext: boolean = true;
   winner: string = null;
+  moveCount: number = 0;
+  tie: boolean = false;
 
   constructor() {}
 
@@ -20,6 +22,8 @@ export class BoardComponent implements OnInit {
     this.squares = Array(9).fill(null);
     this.winner = null;
     this.xIsNext = true;
+    this.moveCount = 0;
+    this.tie = false;
   }
 
   get player() {
@@ -30,6 +34,7 @@ export class BoardComponent implements OnInit {
     if (!this.squares[idx]) {
       this.squares.splice(idx, 1, this.player);
       this.xIsNext = !this.xIsNext;
+      this.moveCount++;
     }
 
     this.winner = this.calculateWinner();
@@ -48,11 +53,15 @@ export class BoardComponent implements OnInit {
     ];
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
+      if (this.moveCount === 9) {
+        this.tie = true;
+      }
       if (
         this.squares[a] &&
         this.squares[a] === this.squares[b] &&
         this.squares[a] === this.squares[c]
       ) {
+        this.tie = false;
         return this.squares[a];
       }
     }

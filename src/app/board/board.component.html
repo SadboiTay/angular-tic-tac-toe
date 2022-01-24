@@ -14,10 +14,10 @@
 
 
 <main>
-    <app-square 
-        *ngFor="let val of squares; let i = index" 
-        [value]="val"
-        (click)="makeMove(i)"> 
+    <div class="grid">
+        <app-square *ngFor="let val of squares; let i = index" [value]="val" (click)="makeMove(i)">
 
-    </app-square>
+        </app-square>
+    </div>
+    <app-recent-winners></app-recent-winners>
 </main>

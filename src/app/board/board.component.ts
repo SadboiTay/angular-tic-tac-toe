@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { WinnersService } from '../services/winners.service';
 
 @Component({
   selector: 'app-board',
@@ -12,7 +13,7 @@ export class BoardComponent implements OnInit {
   moveCount: number = 0;
   tie: boolean = false;
 
-  constructor() {}
+  constructor(private winnersService: WinnersService) {}
 
   ngOnInit() {
     this.newGame();
@@ -62,7 +63,9 @@ export class BoardComponent implements OnInit {
         this.squares[a] === this.squares[c]
       ) {
         this.tie = false;
-        return this.squares[a];
+        const winner = this.squares[a];
+        this.winnersService.setRecentWinners({name: winner})
+        return winner;
       }
     }
     return null;

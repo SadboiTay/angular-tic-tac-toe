@@ -1,5 +1,6 @@
-<h2>Recent Winners</h2>
+<h2 *ngIf="recentWinners.length">Recent Winners</h2>
 <ul>
-    <li>Player X</li>
-    <li>Player O</li>
+    <li *ngFor="let winner of recentWinners">
+        Player {{ winner.name }}
+    </li>
 </ul>

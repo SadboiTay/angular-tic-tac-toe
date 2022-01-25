@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { WinnersService } from '../services/winners.service';
+import { Winners } from '../services/winners.model';
 
 @Component({
   selector: 'app-recent-winners',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecentWinnersComponent implements OnInit {
 
-  constructor() { }
+  recentWinners: Winners[];
+
+  constructor(private winnersService: WinnersService) { }
 
   ngOnInit(): void {
+    this.winnersService.getRecentWinners()
+      .subscribe(
+        recentWinners => this.recentWinners = recentWinners
+      );
   }
 
 }

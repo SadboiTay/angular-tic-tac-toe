@@ -27,4 +27,12 @@ app-square {
         height: 200px;
         width: initial;
     }
+
+    main {
+        flex-direction: row;
+    }
+
+    app-recent-winners {
+        margin-left: 7vw;
+    }
 }
